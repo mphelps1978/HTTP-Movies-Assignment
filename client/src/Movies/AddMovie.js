@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React,{ useState } from 'react'
 import Axios from 'axios'
 
-const UpdateMovie = (props) => {
-  const { id }= useParams()
-  console.log(id);
+export const AddMovie = (props) => {
 
   const movieTemplate = {
-    id: id,
+    id: Date.now(),
     title: '',
     director: '',
     metascore: '',
@@ -48,10 +45,10 @@ const UpdateMovie = (props) => {
     })
   }
 
-  const updateMovie = ev => {
+  const addMovie = ev => {
     ev.preventDefault()
     console.log(movie)
-    Axios.put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+    Axios.post(`http://localhost:5000/api/movies/`, movie)
     .then(res => {
       // console.log(res)
       props.history.push('/')
@@ -62,7 +59,7 @@ const UpdateMovie = (props) => {
 
   return(
     <div>
-      <form onSubmit={updateMovie}>
+      <form onSubmit={addMovie}>
         <input
           type="text"
           name="title"
@@ -96,11 +93,11 @@ const UpdateMovie = (props) => {
         Add Actor
         </button>
         <button>
-          Update database
+          Add Movie to Database
         </button>
       </form>
     </div>
   )
 }
 
-export default UpdateMovie
+export default AddMovie

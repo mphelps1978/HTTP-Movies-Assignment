@@ -59,7 +59,7 @@ export default class Movie extends React.Component {
       <div>
         <Link to={`/update-movie/${this.state.movie.id}`}>Edit Details</Link>
       </div>
-      <div onClick={this.deleteMovie}>Delete Movie from Database</div>
+      <Link onClick={this.deleteMovie}>Delete Movie from Database</Link>
       </div>
     );
   }
