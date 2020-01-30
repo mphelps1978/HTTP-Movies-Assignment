@@ -16,7 +16,7 @@ import { Card, TextField, Button } from '@material-ui/core';
 
 
 const UpdateMovie = (props) => {
-  console.log('Props: ', props)
+  // console.log('Props: ', props)
   const { id } = useParams()
 
   const [movie, setMovie] = useState(movieTemplate)
@@ -28,7 +28,7 @@ const UpdateMovie = (props) => {
     // console.log('Updating: ',movieBeingUpdated);
     if (movieBeingUpdated){
       setMovie(movieBeingUpdated)
-      console.log("after update: ", movie)
+      // console.log("after update: ", movie)
     }
   }, [props.movies, id])
 
@@ -78,7 +78,7 @@ const UpdateMovie = (props) => {
 
   const updateMovie = ev => {
     ev.preventDefault()
-    console.log(movie)
+    // console.log(movie)
     Axios.put(`http://localhost:5000/api/movies/${movie.id}`, movie)
     .then(res => {
       // console.log(res)
@@ -147,17 +147,15 @@ const UpdateMovie = (props) => {
             movie.stars.map(cast=> {
               console.log("Checking Array: ", movie.stars)
               return (
-               <input
-              key={movie}
-              name="castMember"
-              value={cast}
-              name="castList"
-              type="checkbox"
-              label={cast}
-              onClick={updateCastList}
-              />
 
-
+                  <input
+                  key={movie}
+                  value={cast}
+                  name="castList"
+                  type="checkbox"
+                  label={cast}
+                  onClick={updateCastList}
+                  />
 
               )
             })
