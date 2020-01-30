@@ -28,6 +28,7 @@ const UpdateMovie = (props) => {
     // console.log('Updating: ',movieBeingUpdated);
     if (movieBeingUpdated){
       setMovie(movieBeingUpdated)
+      console.log("after update: ", movie)
     }
   }, [props.movies, id])
 
@@ -61,6 +62,19 @@ const UpdateMovie = (props) => {
       ]
     })
   }
+
+//TODO: This should work as intended, however until I can get the list to display properly, better to leave it out
+
+  const updateCastList = (ev, value) => {
+
+  //   console.log(ev.target.checked)
+
+  //   if (ev.target.checked) {
+  //     setCast(cast.filter(function(val) {return val !== value})
+      // }
+  }
+
+
 
   const updateMovie = ev => {
     ev.preventDefault()
@@ -124,6 +138,32 @@ const UpdateMovie = (props) => {
         </Button>
       </form>
       </Card>
+      </div>
+      <div>
+        <form>
+          {
+            // TODO: can't get this one to work. It shows the number of checkboxes needed, but can't populate the label.
+
+            movie.stars.map(cast=> {
+              console.log("Checking Array: ", movie.stars)
+              return (
+               <input
+              key={movie}
+              name="castMember"
+              value={cast}
+              name="castList"
+              type="checkbox"
+              label={cast}
+              onClick={updateCastList}
+              />
+
+
+
+              )
+            })
+          }
+          <button type="sumbit">Remove CastMember</button>
+        </form>
       </div>
     </div>
   )
