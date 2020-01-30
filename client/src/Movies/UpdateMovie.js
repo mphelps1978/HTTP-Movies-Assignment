@@ -1,21 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Axios from 'axios'
 
-const UpdateMovie = (props) => {
-  const { id }= useParams()
-  console.log(id);
+import './movieapp.css'
+
+import { Card, TextField, Button } from '@material-ui/core';
 
   const movieTemplate = {
-    id: id,
     title: '',
     director: '',
     metascore: '',
     stars: []
   };
 
+
+
+const UpdateMovie = (props) => {
+  console.log('Props: ', props)
+  const { id } = useParams()
+
   const [movie, setMovie] = useState(movieTemplate)
   const [cast, setCast] = useState('')
+
+
+  useEffect(() => {
+    const movieBeingUpdated = props.movies.find(movie => `${movie.id}` === id)
+    // console.log('Updating: ',movieBeingUpdated);
+    if (movieBeingUpdated){
+      setMovie(movieBeingUpdated)
+    }
+  }, [props.movies, id])
 
   const handleChange = ev => {
     ev.persist()
@@ -62,43 +76,55 @@ const UpdateMovie = (props) => {
 
   return(
     <div>
-      <form onSubmit={updateMovie}>
-        <input
+    <h1 style={{textAlign: 'center'}}>Update Title</h1>
+    <div className="addFormContainer">
+    <Card>
+      <form onSubmit={updateMovie} className='formStyling'>
+        <TextField
           type="text"
           name="title"
           value={movie.title}
           placeholder="Title"
           onChange={handleChange}
         />
-        <input
+        <TextField
           type="text"
           name="director"
           value={movie.director}
           placeholder="Director"
           onChange={handleChange}
         />
-        <input
+        <TextField
           type="number"
           name="metascore"
+          placeholder="Metascore"
           value={movie.metascore}
           onChange={handleChange}
         />
-        <input
+        <TextField
             type="text"
             name="stars"
-            placeholder="Actors (comma separated)"
+            placeholder="Cast (One at a time)"
             value={cast}
             onChange={handleCast}
         />
-        <button
+        <Button
+          variant="contained"
+          color="secondary"
           onClick={addCast}
         >
-        Add Actor
-        </button>
-        <button>
+        Add CastMember
+        </Button>
+        <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        >
           Update database
-        </button>
+        </Button>
       </form>
+      </Card>
+      </div>
     </div>
   )
 }

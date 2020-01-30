@@ -1,0 +1,18 @@
+.addFormContainer {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.formStyling {
+  margin: 30px;
+  width: 200px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
